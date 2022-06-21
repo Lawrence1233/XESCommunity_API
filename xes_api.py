@@ -173,3 +173,54 @@ def parse(Dict :dict)->dict:
         'updated_at':Dict['data']['updated_at']
     }
     return _output
+
+def get_user_info(user_id,cookie='')->dict:
+    """
+    获取用户信息
+
+    已知信息：
+    fans 粉丝
+    follows 关注
+    is_my 是我自己
+    realname 真名
+    signature 个性签名
+
+    协议：GET
+    :param user_id 用户id
+    :return:
+    """
+    headers = {
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33'
+    }
+    if cookie != '':
+        _output=requests.get('https://code.xueersi.com/api/space/profile?user_id=%s'%user_id,headers,cookies=cookie)
+    else:
+        _output=requests.get('https://code.xueersi.com/api/space/profile?user_id=%s' % user_id, headers)
+    _output=eval(_output.text.replace('true','True').replace('false','False'))
+    return _output
+
+def get_index_info(user_id)->dict:
+    """
+    首页信息
+    https://code.xueersi.com/api/space/index?user_id=?
+
+    已知信息：（data下）
+    overview 我的成就
+    fans 粉丝列表
+    favorites 收藏列表
+    follows 关注列表
+    representative_work 代表作信息
+    works 作品列表
+
+    协议 GET
+    :param user_id: 用户id
+    :return: 输出以上
+    """
+    _output=requests.get('https://code.xueersi.com/api/space/index?user_id=%s'%user_id)
+    _output=eval(_output.text.replace('true','True').replace('false','False'))
+    return _output
+
+
+
+
