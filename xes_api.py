@@ -1,12 +1,12 @@
 import requests
 import time
 
-def save(Name :str,xml,Cookie :str,headers={},type_='webpy')->object:
+def save(Name :str, xml, Cookie :str,headers={},type_='webpy')->object:
     """
     保存作品
-    :param name: 作品名
+    :param Name: 作品名
     :param xml: 作品内容
-    :param cookie: COOKIE
+    :param Cookie: COOKIE
     :param headers: 自定义请求头
     :param type_: 作品类型 scratch python cpp
     :return: 返回请求变量
